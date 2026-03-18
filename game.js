@@ -33,7 +33,7 @@ restart.addEventListener('click', () => {
 for(let i = 0; i < squares.length; i++){
     squares[i].addEventListener('click', () => {
 	if(someoneWon) return;
-        gamestatelogger.logClickEvent(ID, "Click", i, timestep, "n/a");
+        gamestatelogger.logClickEvent(ID, "Click", i, timestep);
         if(squares[i].textContent !== ''){
             return
         }
@@ -62,7 +62,7 @@ function checkWin(currentPlayer) {
     for(let i = 0; i < winning_combinations.length; i++){
         const [a, b, c] = winning_combinations[i]
         if(squares[a].textContent === currentPlayer && squares[b].textContent === currentPlayer && squares[c].textContent === currentPlayer){
-            gamestatelogger.logGameResult(ID, `${currentPlayer} has won`, timestep, "n/a", "n/a")
+            gamestatelogger.logGameResult(ID, `${currentPlayer} has won`, timestep)
             timestep++;
             return true
         }
@@ -76,7 +76,7 @@ function checkTie(){
             return false;
         }
     }
-    gamestatelogger.logGameResult(ID, "Tie", timestep, "n/a", "n/a");
+    gamestatelogger.logGameResult(ID, "Tie", timestep);
     timestep++;
     return true
 }
@@ -86,9 +86,9 @@ function restartButton() {
     for(let i = 0; i < squares.length; i++) {
         squares[i].textContent = ""
     }
-    gamestatelogger.logClickEvent(ID, "Click", 'restartButton', timestep, "n/a")
+    gamestatelogger.logClickEvent(ID, "Click", 'restartButton', timestep)
     timestep++;
-    
+
     endMessage.textContent=`X's turn!`
     currentPlayer = players[0]
 }

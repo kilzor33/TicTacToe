@@ -5,6 +5,7 @@ const ID = 0;
 
 const board = document.getElementById('board')
 const squares = document.getElementsByClassName('square')
+const restart = document.getElementById('restartButton')
 const players = ['X', 'O']
 let currentPlayer = players[0]
 const endMessage = document.createElement('h2')
@@ -25,8 +26,12 @@ const winning_combinations = [
 ]
 
 var timestep = 0;
+restart.addEventListener('click', () => {
+    restartButton();
+})
+
 for(let i = 0; i < squares.length; i++){
-    squares[i].addEventListener('click', e => {
+    squares[i].addEventListener('click', () => {
 	if(someoneWon) return;
         gamestatelogger.logClickEvent(ID, "Click", i, timestep, "n/a");
         if(squares[i].textContent !== ''){
@@ -58,6 +63,7 @@ function checkWin(currentPlayer) {
         const [a, b, c] = winning_combinations[i]
         if(squares[a].textContent === currentPlayer && squares[b].textContent === currentPlayer && squares[c].textContent === currentPlayer){
             gamestatelogger.logGameResult(ID, `${currentPlayer} has won`, timestep, "n/a", "n/a")
+            timestep++;
             return true
         }
     }
@@ -71,6 +77,7 @@ function checkTie(){
         }
     }
     gamestatelogger.logGameResult(ID, "Tie", timestep, "n/a", "n/a");
+    timestep++;
     return true
 }
 
@@ -79,6 +86,9 @@ function restartButton() {
     for(let i = 0; i < squares.length; i++) {
         squares[i].textContent = ""
     }
+    gamestatelogger.logClickEvent(ID, "Click", 'restartButton', timestep, "n/a")
+    timestep++;
+    
     endMessage.textContent=`X's turn!`
     currentPlayer = players[0]
 }

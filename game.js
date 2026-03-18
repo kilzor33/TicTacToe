@@ -1,3 +1,8 @@
+import { GameStateLogger } from './lib/gamestatelogger.js';
+
+var gamestatelogger = new GameStateLogger([], 10);
+const ID = 0;
+
 const board = document.getElementById('board')
 const squares = document.getElementsByClassName('square')
 const players = ['X', 'O']
@@ -19,9 +24,11 @@ const winning_combinations = [
     [2, 4, 6]
 ]
 
+var timestep = 0;
 for(let i = 0; i < squares.length; i++){
-    squares[i].addEventListener('click', () => {
+    squares[i].addEventListener('click', e => {
 	if(someoneWon) return;
+        gamestatelogger.logClickEvent(ID, "Click", i, timestep, "n/a");
         if(squares[i].textContent !== ''){
             return
         }
@@ -41,7 +48,8 @@ for(let i = 0; i < squares.length; i++){
             endMessage.textContent= `X's turn!`
         } else {
             endMessage.textContent= `O's turn!`
-        }     
+        }
+        timestep++;     
     })   
 }
 
@@ -49,6 +57,7 @@ function checkWin(currentPlayer) {
     for(let i = 0; i < winning_combinations.length; i++){
         const [a, b, c] = winning_combinations[i]
         if(squares[a].textContent === currentPlayer && squares[b].textContent === currentPlayer && squares[c].textContent === currentPlayer){
+            gamestatelogger.logGameResult(ID, `${currentPlayer} has won`, timestep, "n/a", "n/a")
             return true
         }
     }
@@ -61,6 +70,7 @@ function checkTie(){
             return false;
         }
     }
+    gamestatelogger.logGameResult(ID, "Tie", timestep, "n/a", "n/a");
     return true
 }
 

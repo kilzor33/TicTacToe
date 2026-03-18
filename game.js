@@ -45,7 +45,7 @@ for(let i = 0; i < squares.length; i++){
         }
         if(checkTie()) {
 	    someoneWon = true;
-            endMessage.textContent= `Game is tied!`
+            endMessage.textContent= `Game is tied!` 
             return
         }
         currentPlayer = (currentPlayer === players[0]) ? players[1] : players[0] 

@@ -1,5 +1,5 @@
 {
-  "name": "replayer-server",
+  "name": "gamestatelogger-server",
   "type": "module",
   "author": "Ida Amalie Stougaard, Lukas Hammerhøj, Sophie Gabriela Laksø",
   "engines": {

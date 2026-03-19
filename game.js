@@ -1,7 +1,7 @@
 import { GameStateLogger } from './lib/gamestatelogger.js';
 
 var gamestatelogger = new GameStateLogger([], 10);
-const ID = 0;
+var ID = 0;
 
 const board = document.getElementById('board')
 const squares = document.getElementsByClassName('square')
@@ -67,6 +67,7 @@ function checkWin(currentPlayer) {
         const [a, b, c] = winning_combinations[i]
         if(squares[a].textContent === currentPlayer && squares[b].textContent === currentPlayer && squares[c].textContent === currentPlayer){
             gamestatelogger.logGameResult(ID, `${currentPlayer} has won`, timestep)
+            ID++;
             timestep++;
             return true
         }
@@ -81,6 +82,7 @@ function checkTie(){
         }
     }
     gamestatelogger.logGameResult(ID, "Tie", timestep);
+    ID++;
     timestep++;
     return true
 }

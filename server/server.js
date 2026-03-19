@@ -30,7 +30,7 @@ try {
          }
 
          // If event ends a session, write the final data and '}' to the file and close it.
-         if (v.eventName === "Session ended") {
+         if (v.gameEnd || v.eventName === "Session ended") {
             try {
                // Formatting: "key" : {eventinformation} }
                let data = "\"" + key + "\":" + JSON.stringify(v) + "}";

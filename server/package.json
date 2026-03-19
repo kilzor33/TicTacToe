@@ -1,0 +1,12 @@
+{
+  "name": "replayer-server",
+  "type": "module",
+  "author": "Ida Amalie Stougaard, Lukas Hammerhøj, Sophie Gabriela Laksø",
+  "engines": {
+    "node": ">=12.18.3"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.2.1"
+  }
+}

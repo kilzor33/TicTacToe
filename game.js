@@ -30,6 +30,10 @@ restart.addEventListener('click', () => {
     restartButton();
 })
 
+window.addEventListener('beforeunload', () => {
+    gamestatelogger.logGameEnd(ID, "Session ended", timestep);
+});
+
 for(let i = 0; i < squares.length; i++){
     squares[i].addEventListener('click', () => {
 	if(someoneWon) return;

@@ -85,4 +85,4 @@ for (const [_, eventObject] of Object.entries(GAMEDATA)) {
     }
 }
 
-console.log(valid);
+return valid;

@@ -28,9 +28,9 @@ class TicTacToe {
     checkWin(currentPlayer) {
         for(let i = 0; i < this.winning_combinations.length; i++){
             const [a, b, c] = this.winning_combinations[i]
-            if(this.squaresArr[a] === this.currentPlayer
-                && this.squaresArr[b] === this.currentPlayer
-                && this.squaresArr[c] === this.currentPlayer){
+            if(this.squaresArr[a] === currentPlayer
+                && this.squaresArr[b] === currentPlayer
+                && this.squaresArr[c] === currentPlayer){
                 return true
             }
         }
@@ -38,7 +38,7 @@ class TicTacToe {
     }
 
     checkTie(){
-        for(let i = 0; i < this.squares.length; i++) {
+        for(let i = 0; i < this.squaresArr.length; i++) {
             if(this.squaresArr[i] === '') {
                 return false;
             }
@@ -48,7 +48,7 @@ class TicTacToe {
 
     restartButton() {
         this.someoneWon = false;
-        for(let i = 0; i < this.squares.length; i++) {
+        for(let i = 0; i < this.squaresArr.length; i++) {
             this.squaresArr[i] = '';
         }
         this.currentPlayer = this.players[0]
@@ -62,7 +62,6 @@ let gameInstance = new TicTacToe();
 for (const [_, eventObject] of Object.entries(GAMEDATA)) {
     switch (eventObject.eventName) {
         case "Click":
-            var clickEvent = new MouseEvent("click");
             if (eventObject.location === "restartButton") {
                 gameInstance.restartButton();
             } else {

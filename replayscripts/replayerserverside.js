@@ -71,9 +71,9 @@ class TicTacToe {
     checkWin(currentPlayer) {
         for(let i = 0; i < this.winning_combinations.length; i++){
             const [a, b, c] = this.winning_combinations[i]
-            if(this.squaresArr[a] === this.currentPlayer
-                && this.squaresArr[b] === this.currentPlayer
-                && this.squaresArr[c] === this.currentPlayer){
+            if(this.squaresArr[a] === currentPlayer
+                && this.squaresArr[b] === currentPlayer
+                && this.squaresArr[c] === currentPlayer){
                 this.timestep++;
                 this.endMessage.textContent=`Game over! ${currentPlayer} wins!`
                 return true
@@ -83,7 +83,7 @@ class TicTacToe {
     }
 
     checkTie(){
-        for(let i = 0; i < this.squares.length; i++) {
+        for(let i = 0; i < this.squaresArr.length; i++) {
             if(this.squaresArr[i] === '') {
                 return false;
             }
@@ -94,7 +94,7 @@ class TicTacToe {
 
     restartGame() {
         this.someoneWon = false;
-        for(let i = 0; i < this.squares.length; i++) {
+        for(let i = 0; i < this.squaresArr.length; i++) {
             this.squares[i].textContent = ""
             this.squaresArr[i] = '';
         }
@@ -110,8 +110,7 @@ var valid = false;
 let gameInstance = new TicTacToe();
 
 let GAMEDATA =
-{
-"6":{"ID":1,"eventName":"Click","location":"restartButton","eventTime":5,"points":"n/a"},
+{"6":{"ID":1,"eventName":"Click","location":"restartButton","eventTime":5,"points":"n/a"},
 "7":{"ID":1,"eventName":"Click","location":3,"eventTime":6,"points":"n/a"},
 "8":{"ID":1,"eventName":"Click","location":4,"eventTime":7,"points":"n/a"},
 "9":{"ID":1,"eventName":"Click","location":1,"eventTime":8,"points":"n/a"},
@@ -121,8 +120,8 @@ let GAMEDATA =
 "13":{"ID":1,"eventName":"Click","location":8,"eventTime":12,"points":"n/a"},
 "14":{"ID":1,"eventName":"Click","location":6,"eventTime":13,"points":"n/a"},
 "15":{"ID":1,"eventName":"Click","location":2,"eventTime":14,"points":"n/a"},
-"16":{"ID":1,"gameEnd":true,"eventName":"Game over! X wins!","eventTime":14,"points":"n/a","highscore":"n/a"}
-} 
+"16":{"ID":1,"gameEnd":true,"eventName":"`Game over! O wins!","eventTime":14,"points":"n/a","highscore":"n/a"}}
+
 
 for (const [_, eventObject] of Object.entries(GAMEDATA)) {
     switch (eventObject.eventName) {

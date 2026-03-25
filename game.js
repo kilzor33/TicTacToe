@@ -71,7 +71,7 @@ function checkWin(currentPlayer) {
         const [a, b, c] = winning_combinations[i]
         if(squaresArr[a] === currentPlayer && squaresArr[b] === currentPlayer
             && squaresArr[c] === currentPlayer){
-            gamestatelogger.logGameResult(ID, `${currentPlayer} has won`, timestep)
+            gamestatelogger.logGameResult(ID, `Game over! ${currentPlayer} wins!`, timestep)
             ID++;
             timestep++;
             return true

@@ -4,6 +4,9 @@ var gamestatelogger = new GameStateLogger([], 10);
 var ID = 0;
 
 const board = document.getElementById('board')
+var squaresArr = ['', '', '',
+                  '', '', '',
+                  '', '', ''];
 const squares = document.getElementsByClassName('square')
 const restart = document.getElementById('restartButton')
 const players = ['X', 'O']
@@ -31,7 +34,7 @@ restart.addEventListener('click', () => {
 })
 
 window.addEventListener('beforeunload', () => {
-    gamestatelogger.logGameEnd(ID, "Session ended", timestep);
+    gamestatelogger.logWindowClose(ID, "Session ended", timestep);
 });
 
 for(let i = 0; i < squares.length; i++){
@@ -42,6 +45,7 @@ for(let i = 0; i < squares.length; i++){
             return
         }
         squares[i].textContent = currentPlayer
+        squaresArr[i] = currentPlayer;
         if(checkWin(currentPlayer)) {
 	    someoneWon = true;
             endMessage.textContent=`Game over! ${currentPlayer} wins!`
@@ -65,7 +69,8 @@ for(let i = 0; i < squares.length; i++){
 function checkWin(currentPlayer) {
     for(let i = 0; i < winning_combinations.length; i++){
         const [a, b, c] = winning_combinations[i]
-        if(squares[a].textContent === currentPlayer && squares[b].textContent === currentPlayer && squares[c].textContent === currentPlayer){
+        if(squaresArr[a] === currentPlayer && squaresArr[b] === currentPlayer
+            && squaresArr[c] === currentPlayer){
             gamestatelogger.logGameResult(ID, `${currentPlayer} has won`, timestep)
             ID++;
             timestep++;
@@ -77,7 +82,7 @@ function checkWin(currentPlayer) {
 
 function checkTie(){
     for(let i = 0; i < squares.length; i++) {
-        if(squares[i].textContent === '') {
+        if(squaresArr[i] === '') {
             return false;
         }
     }
@@ -91,6 +96,7 @@ function restartButton() {
     someoneWon = false;
     for(let i = 0; i < squares.length; i++) {
         squares[i].textContent = ""
+        squaresArr[i] = '';
     }
     gamestatelogger.logClickEvent(ID, "Click", 'restartButton', timestep)
     timestep++;

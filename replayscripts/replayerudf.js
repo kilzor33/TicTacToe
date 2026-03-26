@@ -59,7 +59,17 @@ var valid = false;
 
 let gameInstance = new TicTacToe();
 
-for (const [_, eventObject] of Object.entries(GAMEDATA)) {
+const ordered = Object.keys(GAMEDATA).sort().reduce(
+  (obj, key) => { 
+    obj[key] = GAMEDATA[key]; 
+    return obj;
+  }, 
+  {}
+);
+
+console.log(JSON.stringify(ordered));
+
+for (const [_, eventObject] of Object.entries(ordered)) {
     switch (eventObject.eventName) {
         case "Click":
             if (eventObject.location === "restartButton") {
